@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barista</title>
+    <link rel="stylesheet" href="barista_v02.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <main class="app">
+        <header class="kopf">
+            <h1>Barista 2026</h1>
+            <span>Version 1 &middot; HTML</span>
+        </header>
+        <section class="display">
+            <p class="status">System bereit</p>
+                <dl>
+                    <div>
+                        <dt>Temparatur</dt>
+                        <dd>20°</dd>
+                    </div>
+                </dl>
+                <dl>
+                    <div>
+                        <dt>Reinugung in</dt>
+                        <dd>10 Tassen</dd>
+                    </div>
+                </dl>
+        </section>
+        <form action="" class="steuerung" method="get">
+            <section class="karte getraenke">
+                <h2>Getränke wählen</h2>
+                <div class="auswahl">
+                    <button name="getraenke" value="Espressp">Espresso</button>
+                    <button name="getraenke" value="Kaffee">Kaffee</button>
+                    <button name="getraenke" value="Cappuccino">Cappuccino</button>
+                    <button name="getraenke" value="Tee">Tee</button>
+                </div>
+            </section>
+            <section class="karte vorraete">
+                <h2>Vorräte</h2>
+                <div class="vorrat">
+                    <span>Wasser</span>
+                    <small>350 / 500</small>
+                    <progress max="500" value="350"></progress>
+                    <button name="action">füllen</button>
+                </div>
+                <div class="vorrat">
+                    <span>Bohnen</span>
+                    <small>90 / 150</small>
+                    <progress max="150" value="90"></progress>
+                    <button name="action">füllen</button>
+                </div>
+                <div class="vorrat">
+                    <span>Milch</span>
+                    <small>1000 / 1000</small>
+                    <progress max="1000" value="1000"></progress>
+                    <button name="action">füllen</button>
+                </div>
+                <div class="vorrat">
+                    <span>Zucker</span>
+                    <small>40 / 100</small>
+                    <progress max="100" value="40"></progress>
+                    <button name="action">füllen</button>
+                </div>
+            </section>
+            <section class="karte aktion">
+                <button name="action">Aufheitzen</button>
+                <button name="action">Reinigung</button>
+                <button name="action" disabled>START</button>
+                <button name="action">Ausschalten</button>
+            </section>
+        </form>
+    </main>
+</body>
+</html>

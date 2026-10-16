@@ -1,0 +1,66 @@
+body {
+    background-color: #f6f0e8;
+    color: #2b1d14;
+    font-family: system-ui, sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+h1 {
+    margin: 0;
+}
+.app {
+    display: grid;
+    grid-template: 
+        "header header" 
+        "display display" 
+        "getraenke vorraete"
+        "action action"; 
+    width: 70%;
+    margin: auto;
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+}
+
+.display {
+    grid-area: display;
+    display: flex;
+    background-color: #2b1d14;
+    color: #f6f0e8;
+    align-items: center;
+    padding: 0 24px;
+    border-radius: 10px;
+    box-shadow: -4px 0 green;
+}
+
+.display p {
+    margin-right: auto;
+}
+
+.display dl {
+    margin-left: 30px;
+}
+
+.vorraete {
+    grid-area: vorraete;
+}
+
+.getraenke {
+    grid-area: getraenke;
+
+}
+
+
+.wahl {
+    display: flex;
+}
+
+.wahl .vorraete {
+    margin-left: auto;
+}
