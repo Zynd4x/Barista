@@ -1,5 +1,5 @@
 body {
-    background-color: #f6f0e8;
+    background-color: #f2e7d8;
     color: #2b1d14;
     font-family: system-ui, sans-serif;
 }
@@ -18,7 +18,7 @@ h1 {
         "display display" 
         "getraenke vorraete"
         "action action"; 
-    width: 70%;
+    width: fit-content;
     margin: auto;
 }
 
@@ -34,33 +34,111 @@ header {
     background-color: #2b1d14;
     color: #f6f0e8;
     align-items: center;
-    padding: 0 24px;
     border-radius: 10px;
     box-shadow: -4px 0 green;
+    margin-bottom: 1.25rem;
 }
 
 .display p {
-    margin-right: auto;
+    margin: 0 auto 0 1rem;
 }
 
-.display dl {
-    margin-left: 30px;
+button:disabled {
+    cursor: not-allowed;
 }
+
+.werte dd {
+    margin: 0 0 0.7rem;
+    font-size: 1.5rem;
+}
+
+.werte {
+   margin: 0 1.5rem 0 0 ; 
+}
+
+.werte dt {
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    font-size: 0.75rem;
+    color: #b09d8c;
+}
+
 
 .vorraete {
     grid-area: vorraete;
+    padding: 20px;
+}
+
+.vorrat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.vorrat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.vorrat-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+.karte {
+    background-color: #f6f0e8;
+    border: 1px solid #e4d6c5;
+    border-radius: 10px;
+    width: fit-content;
 }
 
 .getraenke {
     grid-area: getraenke;
-
+    padding: 20px;
 }
-
 
 .wahl {
     display: flex;
+    gap: 1rem;
+    height: fit-content;
 }
 
-.wahl .vorraete {
+.wahl h2 {
+    margin: 0;
+}
+
+.action {
+    display: flex;
+    grid-area: action;
+    align-items: center;
+    width: 100%;
+    padding: 1.25rem;
+    margin-top: 1rem;
+}
+
+.action span {
     margin-left: auto;
+}
+
+.aus {
+    padding: 14px 26px;
+}
+
+.start {
+    padding: 1rem 2rem;
+    background-color: green;
+    color: #f2e7d8;
+    font-weight: 900;
+}
+
+.heizen, .reinigen {
+    padding: 0.7rem;
+}
+.action button {
+    margin: 0 0.2rem;
+    border-radius: 8px;
+    border: 1px solid #e4d6c5;
 }
