@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barista</title>
+    <link rel="stylesheet" href="">
+    <script src="index.js"></script>
+
+    <style>
+        body {
+            background-color: #f6f0e8;
+            color: #2b1d14;
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            margin: 0;
+        }
+
+        *{
+            box-sizing: border-box;
+        }
+
+        h1 {
+            margin: 0;
+        }
+        .app {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .kopf {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .kopf h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: #6f4e37;
+        }
+
+        .chip {
+            background: #efe2d3;
+            color: #6f4e37;
+            padding: .2rem .8rem;
+            border-radius: 999px;
+            font-size: .8rem;
+            align-items: center;
+            display: flex;
+        }
+
+        .display {
+            display: flex;
+            background-color: #1d1510;
+            color: #f3e9de;
+            align-items: center;
+            border-radius: 14px;
+            border-left: 6px solid #2f7d4f;
+            margin-bottom: 1.25rem;
+            padding: 1.25rem 1.5rem;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .status {
+            margin: 0;
+            font-family: ui-monospace, Consolas, monospace;
+            font-size: 1.25rem;
+        }
+
+        
+        .werte dd {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .werte {
+            display: flex;
+            margin: 0; 
+            gap: 2rem;
+        }
+
+        .werte dt {
+            font-size: .75rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #b09d8c;
+        }
+        
+        .vorrat {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: .35rem;
+        }
+        
+        .vorrat small {
+            color: #7a6657;
+            font-size: .8rem;
+        }
+        
+        .vorrat progress {
+            width: 150px;
+            flex: 1;
+            height: .7rem;
+            margin: 0 .75rem;
+            accent-color: #6f4e37;
+        }
+        
+        button {
+            font: inherit;
+            cursor: pointer;
+            color: #2b1d14;
+            background: #fffaf3;
+            border: 1px solid #e4d6c5;
+            border-radius: 10px;
+            padding: .7rem 1rem;
+            margin: 0;
+        }
+
+        button:hover:not(:disabled) {
+            background: #efe2d3;
+            border-color: #6f4e37;
+        }
+        
+        button:disabled {
+            cursor: not-allowed;
+            opacity: .45;
+        }
+        .auswahl {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .auswahl button.aktiv {
+            background: #6f4e37;
+            border-color: #6f4e37;
+            color: #fff;
+        }
+
+        .auswahl button {
+            flex: 1;
+            padding: 1.1rem 0.5rem;
+            font-weight: 600;
+           
+        }
+
+        .vorrat span {
+            flex: 0 0 6rem;
+        }
+
+        .vorrat span small {
+            display: block;
+            margin-left: 0;
+        }
+
+        .vorrat button {
+            flex: none;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .karte {
+            background-color: #fffaf3;
+            border: 1px solid #e4d6c5;
+            border-radius: 14px;
+            padding: 1.25rem;
+            flex: 1;
+            margin-bottom: 1.25rem;
+        }
+
+        .karte h2 {
+            margin: 0 0 1rem;
+            font-size: .85rem;
+            letter-spacing: .08rem;
+            text-transform: uppercase;
+            color: #7a6657;
+        }
+
+        .wahl {
+            display: flex;
+            height: fit-content;
+            gap: 1rem;
+            flex: 1 1 100%;
+        }
+
+        .action {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            flex-wrap: wrap;
+            flex: 1 1 100%;
+        }
+
+        .aus {
+            padding: 14px 26px;
+            color: #b3382c;
+            font-weight: 700;
+            border-color: #b3382c;
+        }
+
+        .start {
+            background: #2f7d4f;
+            border-color: #2f7d4f;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: .06em;
+            padding: .9rem 2.2rem;
+            margin-left: auto;
+        }
+
+        .start:hover:not(:disabled) {
+            background: #276b43;
+            border-color: #276b43;
+        }
+
+        .heizen, .reinigen {
+            padding: 0.7rem;
+        }
+
+        .neuesGetraenk {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            margin-top: 100;
+        }
+
+        .steuerung {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 1.25rem;
+        }
+
+        .vorraete .getraenke {
+            flex: 1 1 320px;
+            min-width: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <main class="app">
+        <header class="kopf">
+            <h1>Barista 2026</h1>
+            <span class="chip">Version 3 &middot; HTML</span>
+        </header>
+
+        <section class="display">
+            <p class="status">System bereit</p>
+            <dl class="werte">
+                <div >
+                    <dt>Temparatur</dt>
+                    <dd>20°</dd>
+                </div>         
+                <div >
+                    <dt>Reinugung in</dt>
+                    <dd>10 Tassen</dd>
+                </div>
+            </dl>
+        </section>
+
+        <form action="" class="steuerung" method="post">
+
+            <section class="karte getraenke">
+                <h2>Getränke wählen</h2>
+                <div class="auswahl">
+                    <button name="getraenke" value="Espressp">Espresso</button>
+                    <button name="getraenke" value="Kaffee">Kaffee</button>
+                    <button name="getraenke" value="Cappuccino" class="aktiv">Cappuccino</button>
+                    <button name="getraenke" value="Tee">Tee</button>
+                    <button class="neuesGetraenk">Neues Getränk</button>
+                </div>
+            </section>
+            
+            <section class="karte vorraete">
+                <h2>Vorräte</h2>
+
+                <div class="vorrat">
+                    <span>Wasser<small>350 / 500</small></span>
+                    <progress max="500" value="350"></progress>
+                    <button name="action" value="refillWasser">füllen</button>
+                </div>
+
+                <div class="vorrat">
+                    <span>Bohnen<small>90 / 150</small></span>
+                    <progress max="150" value="90"></progress>
+                    <button name="action" value="refillBohnen">füllen</button>
+                </div>
+
+                <div class="vorrat">
+                    <span>Milch<small>1000 / 1000</small></span>
+                    <progress max="1000" value="1000"></progress>
+                    <button name="action" value="refillMilch">füllen</button>
+                </div>
+
+                <div class="vorrat">
+                    <span>Zucker<small>40 / 100</small></span>
+                    <progress max="100" value="40"></progress>
+                    <button name="action" value="refillZucker">füllen</button>
+                </div> 
+            </section>
+            <section class="karte action">
+                    <button name="action" value="heizen">Aufheitzen</button>
+                    <button name="action" value="reinigen">Reinigung</button>
+                    <button name="action" disabled class="start" value="starten">START</button>
+                    <button name="action" class="aus" value="reset">Ausschalten</button>
+            </section>
+        </form>
+    </main>
+</body>
+</html>
