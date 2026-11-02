@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- Barista 2026, Version 6 (aufgeräumt). Basis für Version 7.
+     Dateien im selben Ordner: barista_v06.html (diese Datei) und barista.css.
+     In Version 7 kommt barista.js dazu. -->
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barista 2026 - Version 6</title>
+    <link rel="stylesheet" href="barista.css">
+</head>
+
+<body>
+    <main class="app">
+
+        <!-- Kopf -->
+        <header class="kopf">
+            <h1>Barista 2026</h1>
+            <span class="chip">Version 6 &middot; Variablen</span>
+        </header>
+
+        <!-- Display: Status, Temperatur, Reinigung. Hier schreibt JavaScript ab Version 7. -->
+        <section class="display">
+            <p class="status">System bereit</p>
+            <dl class="werte">
+                <div>
+                    <dt>Temperatur</dt>
+                    <dd>20°</dd>
+                </div>
+                <div>
+                    <dt>Reinigung in</dt>
+                    <dd>10 Tassen</dd>
+                </div>
+            </dl>
+        </section>
+
+        <!-- Formular: Buttons mit name und value. Ab Version 7 fängt JavaScript die Klicks ab. -->
+        <form method="post" action="" class="steuerung">
+
+            <!-- Getränke: class="aktiv" markiert die Auswahl -->
+            <section class="karte getraenke">
+                <h2>Getränk wählen</h2>
+                <div class="auswahl">
+                    <button name="getraenk" value="Espresso">Espresso</button>
+                    <button name="getraenk" value="Kaffee">Kaffee</button>
+                    <button name="getraenk" value="Cappuccino" class="aktiv">Cappuccino</button>
+                    <button name="getraenk" value="Tee">Tee</button>
+                </div>
+            </section>
+
+            <!-- Vorräte: progress mit max und value -->
+            <section class="karte vorraete">
+                <h2>Vorräte</h2>
+
+                <div class="vorrat">
+                    <span>Wasser<small>350 / 500</small></span>
+                    <progress max="500" value="350"></progress>
+                    <button name="action" value="refillWasser">füllen</button>
+                </div>
+
+                <div class="vorrat">
+                    <span>Bohnen<small>90 / 150</small></span>
+                    <progress max="150" value="90"></progress>
+                    <button name="action" value="refillBohnen">füllen</button>
+                </div>
+
+                <div class="vorrat">
+                    <span>Milch<small>1000 / 1000</small></span>
+                    <progress max="1000" value="1000"></progress>
+                    <button name="action" value="refillMilch">füllen</button>
+                </div>
+
+                <div class="vorrat">
+                    <span>Zucker<small>40 / 100</small></span>
+                    <progress max="100" value="40"></progress>
+                    <button name="action" value="refillZucker">füllen</button>
+                </div>
+            </section>
+
+            <!-- Aktionen: START ist gesperrt (disabled) -->
+            <section class="karte aktionen">
+                <button name="action" value="heizen">Aufheizen</button>
+                <button name="action" value="reinigen">Reinigen</button>
+                <button class="start" name="action" value="starten" disabled>START</button>
+                <button class="aus" name="action" value="reset">Ausschalten</button>
+            </section>
+
+        </form>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,526 @@
+/* Barista 2026, Stand Version 6 (aufgeräumt).
+   Spätere Regeln überschreiben frühere, deshalb ist die Reihenfolge wichtig.
+   Neue Regeln kommen ans Ende der Datei. */
+
+
+/* ===== Variablen ===== */
+:root {
+    --bg: #f6f0e8;
+    --karte: #fffaf3;
+    --rand: #e4d6c5;
+    --text: #2b1d14;
+    --text-2: #7a6657;
+    --akzent: #6f4e37;
+    --akzent-hell: #efe2d3;
+    --on-akzent: #fff;
+    --ok: #2f7d4f;
+    --ok-dunkel: #276b43;
+    --fehler: #b3382c;
+    --display-bg: #1d1510;
+    --display-text: #f3e9de;
+    --display-label: #b09d8c;
+}
+
+/* Dunkelmodus: überschreibt nur Variablen */
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+        --bg: #1c1511;
+        --karte: #261c16;
+        --rand: #3a2b21;
+        --text: #f3e9de;
+        --text-2: #b09d8c;
+        --akzent: #d2a679;
+        --akzent-hell: #3a2b21;
+        --on-akzent: #1c1511;
+        --fehler: #e0705f;
+        --display-bg: #0e0a07;
+    }
+}
+
+/* Zweites Theme: <body class="theme-blau"> */
+.theme-blau {
+    --bg: #eef3fa;
+    --karte: #fbfdff;
+    --rand: #cfdced;
+    --text: #14233a;
+    --text-2: #53657f;
+    --akzent: #2b5fa3;
+    --akzent-hell: #dde8f7;
+    --on-akzent: #fff;
+}
+
+
+/* ===== Grundlagen ===== */
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.app {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.kopf {
+    margin-bottom: 1.25rem;
+}
+
+.kopf h1 {
+    margin: 0 0 .5rem;
+    font-size: 1.6rem;
+    color: var(--akzent);
+}
+
+.chip {
+    background: var(--akzent-hell);
+    color: var(--akzent);
+    padding: .2rem .8rem;
+    border-radius: 999px;
+    font-size: .8rem;
+}
+
+.display {
+    background: var(--display-bg);
+    color: var(--display-text);
+    border-radius: 14px;
+    border-left: 6px solid var(--ok);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.status {
+    margin: 0 0 1rem;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 1.25rem;
+}
+
+.werte {
+    margin: 0;
+}
+
+.werte dt {
+    font-size: .75rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--display-label);
+}
+
+.werte dd {
+    margin: 0 0 .75rem;
+    font-size: 1.5rem;
+}
+
+.karte {
+    background: var(--karte);
+    border: 1px solid var(--rand);
+    border-radius: 14px;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.karte h2 {
+    margin: 0 0 1rem;
+    font-size: .85rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-2);
+}
+
+.vorrat {
+    margin-bottom: .75rem;
+}
+
+.vorrat small {
+    color: var(--text-2);
+    font-size: .8rem;
+    margin-left: .35rem;
+}
+
+.vorrat progress {
+    width: 150px;
+    height: .7rem;
+    margin: 0 .75rem;
+    accent-color: var(--akzent);
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    color: var(--text);
+    background: var(--karte);
+    border: 1px solid var(--rand);
+    border-radius: 10px;
+    padding: .7rem 1rem;
+    margin: 0 .5rem .5rem 0;
+}
+
+button:hover:not(:disabled) {
+    background: var(--akzent-hell);
+    border-color: var(--akzent);
+}
+
+button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.auswahl button.aktiv {
+    background: var(--akzent);
+    border-color: var(--akzent);
+    color: var(--on-akzent);
+}
+
+.start {
+    background: var(--ok);
+    border-color: var(--ok);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: .06em;
+    padding: .9rem 2.2rem;
+}
+
+.start:hover:not(:disabled) {
+    background: var(--ok-dunkel);
+    border-color: var(--ok-dunkel);
+}
+
+.aus {
+    color: var(--fehler);
+    border-color: var(--fehler);
+}
+
+
+/* ===== Flexbox (Version 3) ===== */
+.kopf {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kopf h1 {
+    margin: 0;
+}
+
+.display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.status {
+    margin: 0;
+}
+
+.werte {
+    display: flex;
+    gap: 2rem;
+}
+
+.werte dd {
+    margin: 0;
+}
+
+button {
+    margin: 0;
+}
+
+.aktionen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    align-items: center;
+}
+
+.start {
+    margin-left: auto;
+}
+
+.auswahl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.auswahl button {
+    flex: 1 1 120px;
+    padding: 1.1rem .5rem;
+    font-weight: 600;
+}
+
+.vorrat {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.vorrat span {
+    flex: 0 0 6rem;
+}
+
+.vorrat span small {
+    display: block;
+    margin-left: 0;
+}
+
+.vorrat progress {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+}
+
+.vorrat button {
+    flex: none;
+    padding: .35rem .75rem;
+    font-size: .85rem;
+}
+
+.steuerung {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.25rem;
+}
+
+.getraenke,
+.vorraete {
+    flex: 1 1 320px;
+    min-width: 0;
+}
+
+.aktionen {
+    flex: 1 1 100%;
+}
+
+
+/* ===== Grid (Version 4) ===== */
+.auswahl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.vorrat {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "name   knopf"
+        "balken balken";
+    row-gap: .4rem;
+}
+
+.vorrat span {
+    grid-area: name;
+}
+
+.vorrat button {
+    grid-area: knopf;
+}
+
+.vorrat progress {
+    grid-area: balken;
+    width: 100%;
+}
+
+.steuerung {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+        "getraenke vorraete"
+        "aktionen  aktionen";
+}
+
+.getraenke {
+    grid-area: getraenke;
+}
+
+.vorraete {
+    grid-area: vorraete;
+}
+
+.aktionen {
+    grid-area: aktionen;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 12rem;
+    column-gap: 1.25rem;
+    grid-template-areas:
+        "kopf      kopf      kopf"
+        "display   display   aktionen"
+        "getraenke vorraete  aktionen";
+}
+
+.steuerung {
+    display: contents;
+}
+
+.kopf {
+    grid-area: kopf;
+}
+
+.display {
+    grid-area: display;
+}
+
+.aktionen {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+
+.start {
+    margin-left: 0;
+}
+
+@media (max-width: 900px) {
+    .app {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "kopf"
+            "display"
+            "getraenke"
+            "vorraete"
+            "aktionen";
+    }
+
+    .aktionen {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .start {
+        margin-left: auto;
+    }
+}
+
+
+/* ===== Media Queries (Version 5) ===== */
+@media (max-width: 600px) {
+    .app {
+        padding: 1rem;
+    }
+
+    .kopf h1 {
+        font-size: 1.3rem;
+    }
+
+    .display,
+    .karte {
+        padding: 1rem;
+    }
+
+    .status {
+        font-size: 1.1rem;
+    }
+
+    .aktionen {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+    }
+
+    .start {
+        margin-left: 0;
+    }
+
+    button {
+        min-height: 44px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .app {
+        max-width: 1100px;
+    }
+}
+
+/* Drucken: Papierfarben über die Variablen */
+@media print {
+    :root {
+        --bg: #fff;
+        --karte: #fff;
+        --text: #000;
+        --text-2: #444;
+        --rand: #999;
+        --display-bg: #fff;
+        --display-text: #000;
+        --display-label: #444;
+    }
+
+    button {
+        display: none;
+    }
+
+    .aktionen {
+        display: none;
+    }
+
+    .display {
+        border: 1px solid #000;
+        border-left-width: 6px;
+    }
+
+    .karte {
+        break-inside: avoid;
+    }
+}
+
+
+
+/* Version 8: Fehleranzeige im Display rote markierung statt grüner */
+/* bei V8 noch optional - V10 braucht sie dann zwingend */
+.display.fehler {
+    border-left-color: var(--fehler);
+}
+
+/* Version 11: Hinweis bei Datenbankproblemen */
+.hinweis {
+    margin: 0 0 1rem;
+    font-size: .85rem;
+    color: var(--fehler);
+}
+
+/* Version 11 (optional): So viele Spalten, wie Platz ist */
+.auswahl {
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+}
+
+/* Version 12: Suchfeld und Trefferanzeige */
+.suche {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.suche input {
+    flex: 1;
+    min-width: 0;
+    font: inherit;
+    color: var(--text);
+    background: var(--karte);
+    border: 1px solid var(--rand);
+    border-radius: 10px;
+    padding: .5rem .75rem;
+}
+
+.suche button {
+    padding: .5rem 1rem;
+}
+
+.suche-info {
+    margin: 0 0 1rem;
+    font-size: .85rem;
+    color: var(--text-2);
+}

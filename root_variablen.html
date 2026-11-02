@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variablen</title>
+    <style>
+
+        :root {
+            --bg: lightgray;
+            --kachel: #ffffff;
+            --text: green;
+            --border: black;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: sans-serif;
+        }
+        
+        .kachel {
+            background: var(--kachel);
+            border: 3px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .kachel button {
+            background: darkgrey;
+            border-radius: 5px;
+            color: var(--text);
+            border: 0;
+            padding: 5px;
+        }
+
+        .sommer {
+            --kachel: #f3d320;
+        }
+
+        .winter {
+            --kachel: #77d2ff;
+        }
+
+        h2, h1 {
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+    <h1>Kacheln</h1>
+    <div class="kachel">
+        <h2>Inhalt</h2>
+        <p>noch etwas Text</p>
+        <button>Klick mich</button>
+    </div>
+    <div class="kachel sommer">
+        <h2>Sommer</h2>
+        <p>so sieht es im Sommer aus </p>
+    </div>
+    <div class="kachel winter">
+        <h2>Winter</h2>
+        <p>so sieht es im Winter aus </p>
+    </div>
+</body>
+</html>

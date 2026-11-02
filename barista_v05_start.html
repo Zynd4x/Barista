@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TN Barista 2026 - Version 5</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #f6f0e8;
+            color: #2b1d14;
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .app {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .kopf {
+            margin-bottom: 1.25rem;
+        }
+
+        .kopf h1 {
+            margin: 0 0 .5rem;
+            font-size: 1.6rem;
+            color: #6f4e37;
+        }
+
+        .chip {
+            background: #efe2d3;
+            color: #6f4e37;
+            padding: .2rem .8rem;
+            border-radius: 999px;
+            font-size: .8rem;
+        }
+
+        .display {
+            background: #1d1510;
+            color: #f3e9de;
+            border-radius: 14px;
+            border-left: 6px solid #2f7d4f;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .status {
+            margin: 0 0 1rem;
+            font-family: ui-monospace, Consolas, monospace;
+            font-size: 1.25rem;
+        }
+
+        .werte {
+            margin: 0;
+        }
+
+        .werte dt {
+            font-size: .75rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #b09d8c;
+        }
+
+        .werte dd {
+            margin: 0 0 .75rem;
+            font-size: 1.5rem;
+        }
+
+        .karte {
+            background: #fffaf3;
+            border: 1px solid #e4d6c5;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .karte h2 {
+            margin: 0 0 1rem;
+            font-size: .85rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #7a6657;
+        }
+
+        .vorrat {
+            margin-bottom: .75rem;
+        }
+
+        .vorrat small {
+            color: #7a6657;
+            font-size: .8rem;
+            margin-left: .35rem;
+        }
+
+        .vorrat progress {
+            width: 150px;
+            height: .7rem;
+            margin: 0 .75rem;
+            accent-color: #6f4e37;
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer;
+            color: #2b1d14;
+            background: #fffaf3;
+            border: 1px solid #e4d6c5;
+            border-radius: 10px;
+            padding: .7rem 1rem;
+            margin: 0 .5rem .5rem 0;
+        }
+
+        button:hover:not(:disabled) {
+            background: #efe2d3;
+            border-color: #6f4e37;
+        }
+
+        button:disabled {
+            opacity: .45;
+            cursor: not-allowed;
+        }
+
+        .auswahl button.aktiv {
+            background: #6f4e37;
+            border-color: #6f4e37;
+            color: #fff;
+        }
+
+        .start {
+            background: #2f7d4f;
+            border-color: #2f7d4f;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: .06em;
+            padding: .9rem 2.2rem;
+        }
+
+        .start:hover:not(:disabled) {
+            background: #276b43;
+            border-color: #276b43;
+        }
+
+        .aus {
+            color: #b3382c;
+            border-color: #b3382c;
+        }
+
+
+        /* ############################################ */
+
+        /*              FLEXLAYOUT                      */
+
+        /* ############################################ */
+
+        .kopf {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .kopf h1 {
+            margin: 0;
+        }
+
+        .display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .status {
+            margin: 0;
+        }
+
+        .werte {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .werte dd {
+            margin: 0;
+        }
+
+        button {
+            margin: 0;
+        }
+
+        .aktionen {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            /* weil Steuerung display flex hat und wir eigene reihe zuweisen wollen */
+            flex: 1 1 100%;
+        }
+
+        .start {
+            margin-left: auto;
+        }
+
+        .auswahl {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .auswahl button {
+            flex: 1 1 120px;
+            font-weight: 600;
+            padding: 1.1rem 0.5rem;
+        }
+
+        .vorrat {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .vorrat span {
+            flex: 0 0 6rem;
+        }
+
+        .vorrat span small {
+            display: block;
+            margin-left: 0;
+        }
+
+        .vorrat progress {
+            flex: 1;
+            margin: 0;
+        }
+
+        .vorrat button {
+            flex: none;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .steuerung {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 1.25rem;
+        }
+
+        .getraenke,
+        .vorraete {
+            flex: 1 1 320px;
+        }
+
+        /* ################################ */
+        /*         G R I D                  */
+        /* ################################ */
+
+        .auswahl {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .vorrat {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            grid-template-areas:
+                "name knopf"
+                "balken balken"
+        }
+
+        .vorrat span {
+            grid-area: name;
+        }
+
+        .vorrat button {
+            grid-area: knopf;
+        }
+
+        .vorrat progress {
+            grid-area: balken;
+            width: 100%;
+        }
+
+        .steuerung {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-areas:
+                "getraenke  vorraete"
+                "aktionen   aktionen"
+        }
+
+        .getraenke {
+            grid-area: getraenke;
+        }
+
+        .vorraete {
+            grid-area: vorraete;
+        }
+
+        .aktionen {
+            grid-area: aktionen;
+        }
+
+        .app {
+            display: grid;
+            column-gap: 1.25rem;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 12rem;
+            grid-template-areas:
+                "kopf           kopf            kopf"
+                "display        display         aktionen"
+                "getraenke      vorraete        aktionen"
+        }
+
+        .steuerung {
+            display: contents;
+        }
+
+        .kopf {
+            grid-area: kopf;
+        }
+
+        .display {
+            grid-area: display;
+        }
+
+        .aktionen {
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-items: stretch;
+        }
+
+        /* schmales Layout */
+        @media (max-width: 900px) {
+            .app {
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-areas:
+                    "kopf"
+                    "display"
+                    "getraenke"
+                    "vorraete"
+                    "aktionen"
+            }
+
+            .aktionen {
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="app">
+
+        <header class="kopf">
+            <h1>Barista 2026</h1>
+            <span class="chip">Version 5 &middot; Grid</span>
+        </header>
+
+        <section class="display">
+            <p class="status">System bereit Kaffe gekocht werden</p>
+            <dl class="werte">
+                <div>
+                    <dt>Temperatur</dt>
+                    <dd>20°</dd>
+                </div>
+                <div>
+                    <dt>Reinigung in</dt>
+                    <dd>10 Tassen</dd>
+                </div>
+            </dl>
+        </section>
+
+        <form method="post" action="" class="steuerung">
+
+            <section class="karte getraenke">
+                <h2>Getränk wählen</h2>
+                <div class="auswahl">
+                    <button name="getraenk" value="Espresso">Espresso</button>
+                    <button name="getraenk" value="Kaffee">Kaffee</button>
+                    <button name="getraenk" value="Cappuccino" class="aktiv">Cappuccino</button>
+                    <button name="getraenk" value="Tee">Tee mit Wasser</button>
+                </div>
+            </section>
+
+            <section class="karte vorraete">
+                <h2>Vorräte</h2>
+
+                <div class="vorrat">
+                    <span>Wasser<small>350 / 500</small></span>
+                    <progress max="500" value="350"></progress>
+                    <button name="action" value="refillWasser">füllen</button>
+                </div>
+
+                <div class="vorrat">
+                    <span>Bohnen<small>90 / 150</small></span>
+                    <progress max="150" value="90"></progress>
+                    <button name="action" value="refillBohnen">füllen</button>
+                </div>
+
+                <div class="vorrat">
+                    <span>Milch<small>1000 / 1000</small></span>
+                    <progress max="1000" value="1000"></progress>
+                    <button name="action" value="refillMilch">füllen</button>
+                </div>
+
+                <div class="vorrat">
+                    <span>Zucker<small>40 / 100</small></span>
+                    <progress max="100" value="40"></progress>
+                    <button name="action" value="refillZucker">füllen</button>
+                </div>
+            </section>
+
+            <section class="karte aktionen">
+                <button name="action" value="heizen">Aufheizen</button>
+                <button name="action" value="reinigen">Reinigen</button>
+                <button class="start" name="action" value="starten" disabled>STARTEN</button>
+                <button class="aus" name="action" value="reset">Ausschalten</button>
+            </section>
+
+        </form>
+    </main>
+</body>
+
+</html>
