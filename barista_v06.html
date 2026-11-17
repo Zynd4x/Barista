@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barista 2026 - Version 6</title>
     <link rel="stylesheet" href="barista.css">
+    
 </head>
 
 <body>
@@ -22,13 +23,13 @@
 
         <!-- Display: Status, Temperatur, Reinigung. Hier schreibt JavaScript ab Version 7. -->
         <section class="display">
-            <p class="status">System bereit</p>
+            <p class="displayStatus">System bereit</p>
             <dl class="werte">
-                <div>
+                <div class="temp">
                     <dt>Temperatur</dt>
-                    <dd>20°</dd>
+                    <dd>0°</dd>
                 </div>
-                <div>
+                <div class="reinigung">
                     <dt>Reinigung in</dt>
                     <dd>10 Tassen</dd>
                 </div>
@@ -42,10 +43,10 @@
             <section class="karte getraenke">
                 <h2>Getränk wählen</h2>
                 <div class="auswahl">
-                    <button name="getraenk" value="Espresso">Espresso</button>
-                    <button name="getraenk" value="Kaffee">Kaffee</button>
-                    <button name="getraenk" value="Cappuccino" class="aktiv">Cappuccino</button>
-                    <button name="getraenk" value="Tee">Tee</button>
+                    <button type="button" onclick="auswahlGetraenke('Espresso')" name="getraenk" value="Espresso">Espresso</button>
+                    <button type="button" onclick="auswahlGetraenke('Kaffee')" name="getraenk" value="Kaffee">Kaffee</button>
+                    <button type="button" onclick="auswahlGetraenke('Cappucino')" name="getraenk" value="Cappuccino" class="aktiv">Cappuccino</button>
+                    <button type="button" onclick="auswahlGetraenke('Tee')" name="getraenk" value="Tee">Tee</button>
                 </div>
             </section>
 
@@ -55,39 +56,40 @@
 
                 <div class="vorrat">
                     <span>Wasser<small>350 / 500</small></span>
-                    <progress max="500" value="350"></progress>
+                    <progress id="wasserstand" max="500" value="350"></progress>
                     <button name="action" value="refillWasser">füllen</button>
                 </div>
 
                 <div class="vorrat">
                     <span>Bohnen<small>90 / 150</small></span>
-                    <progress max="150" value="90"></progress>
+                    <progress id="bohnenstand" max="150" value="90"></progress>
                     <button name="action" value="refillBohnen">füllen</button>
                 </div>
 
                 <div class="vorrat">
                     <span>Milch<small>1000 / 1000</small></span>
-                    <progress max="1000" value="1000"></progress>
+                    <progress id="milchstand" max="1000" value="1000"></progress>
                     <button name="action" value="refillMilch">füllen</button>
                 </div>
 
                 <div class="vorrat">
                     <span>Zucker<small>40 / 100</small></span>
-                    <progress max="100" value="40"></progress>
+                    <progress id="zuckerstand" max="100" value="40"></progress>
                     <button name="action" value="refillZucker">füllen</button>
                 </div>
             </section>
 
             <!-- Aktionen: START ist gesperrt (disabled) -->
             <section class="karte aktionen">
-                <button name="action" value="heizen">Aufheizen</button>
-                <button name="action" value="reinigen">Reinigen</button>
-                <button class="start" name="action" value="starten" disabled>START</button>
-                <button class="aus" name="action" value="reset">Ausschalten</button>
+                <button type="button" id="heizen" name="action" value="heizen">Aufheizen</button>
+                <button type="button" id="reinigen" name="action" value="reinigen">Reinigen</button>
+                <button type="button" id="start" name="action" value="starten" disabled>START</button>
+                <button type="button" id="aus" name="action" value="reset">Ausschalten</button>
             </section>
 
         </form>
     </main>
+    <script src="barista.js"></script>
 </body>
 
 </html>
